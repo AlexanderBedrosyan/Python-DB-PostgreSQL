@@ -1,0 +1,4 @@
+*.sql linguist-detectable=true
+*.md linguist-detectable=true
+*.sql linguist-language=SQL
+*.plpgsql linguist-language=SQL
