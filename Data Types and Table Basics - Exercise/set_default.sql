@@ -1,0 +1,4 @@
+ALTER TABLE minions_info
+ALTER age SET DEFAULT 0,
+ALTER name SET DEFAULT '',
+ALTER code SET DEFAULT ''
