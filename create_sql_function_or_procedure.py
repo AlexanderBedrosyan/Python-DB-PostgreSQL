@@ -1,4 +1,4 @@
-function_or_procedure = input('Please select option 1 for procedure or option 2 for function:')
+function_or_procedure = input('Please select option 1 for function or option 2 for procedure:')
 
 if function_or_procedure == '1':
     function_name = input('Please provide the name of the function:')
