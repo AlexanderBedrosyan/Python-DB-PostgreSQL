@@ -1,0 +1,41 @@
+CREATE TABLE accounts(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(30) UNIQUE NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    gender CHAR(1) NOT NULL CHECK ( gender in ('M', 'F') ),
+    age INTEGER NOT NULL,
+    job_title VARCHAR(40) NOT NULL,
+    IP VARCHAR(30) NOT NULL
+);
+CREATE TABLE addresses(
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(30) NOT NULL,
+    town VARCHAR(30) NOT NULL,
+    country VARCHAR(30) NOT NULL,
+    account_id INTEGER REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL
+);
+CREATE TABLE photos(
+    id SERIAL PRIMARY KEY,
+    description TEXT,
+    capture_date TIMESTAMP NOT NULL,
+    views INTEGER DEFAULT 0 NOT NULL CHECK ( views >= 0 )
+);
+CREATE TABLE comments(
+    id SERIAL PRIMARY KEY,
+    content VARCHAR(255) NOT NULL,
+    published_on TIMESTAMP NOT NULL,
+    photo_id INTEGER REFERENCES photos(id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL
+);
+CREATE TABLE accounts_photos (
+    account_id INTEGER NOT NULL,
+    photo_id INTEGER NOT NULL,
+    PRIMARY KEY (account_id, photo_id),
+    FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (photo_id) REFERENCES photos(id) ON DELETE CASCADE ON UPDATE CASCADE
+);;
+CREATE TABLE likes(
+    id SERIAL PRIMARY KEY,
+    photo_id INTEGER REFERENCES photos(id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
+    account_id INTEGER REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL
+);
